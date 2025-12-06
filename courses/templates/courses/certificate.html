@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificat d'achèvement</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+            border: 10px solid #f59e0b;
+            background: #fff8e1;
+        }
+
+        .certificate {
+            border: 5px solid #f59e0b;
+            padding: 40px;
+            background-color: white;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #f59e0b;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-top: 20px;
+        }
+
+        .student-name {
+            font-size: 30px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .course-title {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .date {
+            margin-top: 40px;
+            font-size: 18px;
+            color: #888;
+        }
+
+        .signature {
+            margin-top: 60px;
+            font-size: 18px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <h1>Certificat d'achèvement</h1>
+        <h2>Ce certificat est décerné à :</h2>
+        <div class="student-name">{{ user.get_full_name|default:user.username }}</div>
+        <p class="course-title">Pour avoir complété le cours : <strong>{{ course.title }}</strong></p>
+        <p class="date">Date : {{ date }}</p>
+        <p class="signature">Directeur de la plateforme éducative</p>
+    </div>
+</body>
+</html>

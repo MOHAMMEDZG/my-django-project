@@ -1,0 +1,73 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/exams_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="loader">
+  <div class="spinner"></div>
+  <p>جارٍ التحميل...</p>
+</div>
+
+<div class="container mt-5 content-area" style="opacity:0; transition:1s;">
+
+    <h2 class="page-title">📚 الامتحانات الجهوية</h2>
+
+    <!-- اختيار الفئة -->
+    <form method="GET" class="filter-box fade-in">
+        <label>اختر الفئة:</label>
+        <select name="category"  onchange="this.form.submit()">
+            {% for cat in categories %}
+                <option value="{{ cat.id }}" {% if selected_category == cat.id|stringformat:'s' %}selected{% endif %}>
+                    {{ cat.name }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <!-- عرض الملفات -->
+    <div class="pdf-grid">
+        {% for doc in docs %}
+        <div class="small-pdf-item">
+            <span class="pdf-title">{{ doc.title }}</span>
+            <a href="{{ doc.file.url }}" class="download-btn" download>
+                تحميل
+                <span class="badge bg-primary float-end">{{ doc.category.name }}</span>
+            </a>
+        </div>
+        {% empty %}
+            <p class="text-muted">لا توجد امتحانات جهوية متوفرة.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // Loader Animation
+        setTimeout(() => {
+            const loader = document.getElementById("loader");
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = "none", 400);
+            document.querySelector(".content-area").style.opacity = "1";
+        }, 800);
+
+
+        // Fade-in Animation on Scroll
+        const items = document.querySelectorAll(".small-pdf-item");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("fade-in");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        items.forEach(item => observer.observe(item));
+    });
+</script>
+{% endblock %}

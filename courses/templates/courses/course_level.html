@@ -1,0 +1,65 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% block title %} الدروس — {{ level_name }} {% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/course_level.css' %}">
+<div class="course-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-text animate__animated animate__fadeInRight">
+        <h1>دروس مستوى {{ level_name }}</h1>
+        <p>اختر الدرس المناسب لك حسب المستوى و الفئة</p>
+    </div>
+</div>
+
+<div class="container mt-5">
+
+    <!-- ====== البحث ====== -->
+    <form method="GET" class="search-box animate__animated animate__fadeInUp">
+        <input type="text" name="q" value="{{ query }}" placeholder="🔍 ابحث عن درس..." class="search-input">
+        <button type="submit" class="search-btn">بحث</button>
+    </form>
+
+    <!-- ====== البار ديال الكاتيغوري ====== -->
+    <div class="categories-bar animate__animated animate__fadeInDown">
+       <!-- زر جميع الدروس -->
+<a href="?category=all"
+class="category-chip {% if selected_category == 'all' %}active{% endif %}">
+ جميع الدروس
+</a>
+
+<!-- بقية الكاتيغوريات -->
+{% for cat in categories %}
+<a href="?category={{ cat.id }}"
+class="category-chip {% if selected_category == cat.id|stringformat:'s' %}active{% endif %}">
+ {{ cat.name }}
+</a>
+{% endfor %}
+    </div>
+
+    <!-- ====== قائمة الدروس ====== -->
+    <div class="row mt-4">
+        {% for course in courses %}
+        <div class="col-md-6 col-lg-4 mb-4 animate__animated animate__fadeInUp">
+            <div class="course-card">
+                {% if course.image %}
+                    <img src="{{ course.image.url }}" class="course-img">
+                {% endif %}
+                <div class="course-info">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description|truncatechars:100 }}</p>
+                    <a class="btn-view" href="{% url 'course_detail' course.id %}">مشاهدة الدرس</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="text-danger fw-bold">لا توجد دروس حالياً.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

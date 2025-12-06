@@ -1,0 +1,71 @@
+.bg-orange {
+    background-color: #ff6600;
+}
+
+.text-orange {
+    color: #ff6600;
+}
+
+.btn-orange {
+    background-color: #ff6600;
+    color: white;
+}
+
+.btn-orange:hover {
+    background-color: #e65c00;
+    color: white;
+}
+
+.btn-outline-orange {
+    border-color: #ff6600;
+    color: #ff6600;
+}
+
+.btn-outline-orange:hover {
+    background-color: #ff6600;
+    color: white;
+}
+
+.course-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: #fffdf7;
+    font-family: 'Cairo', sans-serif;
+}
+
+.course-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 15px rgba(255, 165, 0, 0.1);
+}
+
+.course-title {
+    color: #f57c00;
+    font-weight: bold;
+}
+
+.text-orange {
+    color: #ff6600;
+}
+
+.card {
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}

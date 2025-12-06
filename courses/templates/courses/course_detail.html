@@ -1,0 +1,83 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% load my_filters %}
+{% block title %}{{ course.title }}{% endblock %}
+{% block content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="container mt-5">
+
+    <!-- ===================== HEADER ===================== -->
+    <div class="course-header animate__animated animate__fadeInDown">
+        <h1 class="mb-3">{{ course.title }}</h1>
+
+        {% if course.image %}
+            <img src="{{ course.image.url }}" class="img-fluid mb-3">
+        {% endif %}
+
+        <p><strong>Nom de l'instructeur :</strong> {{ course.instructor }}</p>
+        <p><strong>الصنف :</strong> {{ course.category.name }}</p>
+        <p><strong>حرر بتاريخ :</strong> {{ course.created_at|date:"Y-m-d" }}</p>
+    </div>
+
+<!-- ===================== VIDEO SECTION ===================== -->
+
+{% if course.video_url %}
+<div class="course-section">
+    <h4>🎥 الفيديو :</h4>
+
+    <iframe width="100%" height="450"
+            src="{{ course.video_url|youtube_embed }}"
+            frameborder="0"
+            allowfullscreen>
+    </iframe>
+</div>
+{% endif %}
+
+    <!-- ===================== CONTENT ===================== -->
+    <div class="course-section animate__animated animate__fadeInUp">
+        <h4>محتوى الدرس :</h4>
+        <p>{{ course.content|linebreaks }}</p>
+    </div>
+
+   
+    <!-- ===================== PDF FILE ===================== -->
+    {% if course.pdf_file %}
+    <div class="course-section pdf-box animate__animated animate__fadeInUp">
+        <h4>معاينة الدرس (PDF)</h4>
+        <iframe src="{{ course.pdf_file.url }}" width="100%" height="600"></iframe>
+        <a href="{{ course.pdf_file.url }}" download class="btn btn-primary mt-3">تحميل PDF</a>
+    </div>
+    {% else %}
+        <p class="text-center">لا يوجد ملف pdf حاليا</p>
+    {% endif %}
+
+    <!-- ===================== COMMENTS ===================== -->
+    <div class="course-section animate__animated animate__fadeInUp">
+        <h4>التعليقات :</h4>
+        {% for comment in comments %}
+            <div class="comment-box">
+                <strong>{{ comment.name }}</strong>
+                <small class="text-muted">- {{ comment.created_at|date:"Y-m-d H:i" }}</small>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% empty %}
+            <p>لا يوجد تعليق حاليا</p>
+        {% endfor %}
+    </div>
+
+    <!-- ===================== ADD COMMENT ===================== -->
+    <div class="course-section animate__animated animate__fadeInUp">
+        <h4>أضف تعليق :</h4>
+        <form method="post" class="comment-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">إرسال</button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
