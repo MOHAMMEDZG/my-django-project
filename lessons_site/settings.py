@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jlf_g99q5ysd$rgpe7%!r@#vc0k1fa_zju&av%b8mc^swltf0%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -129,3 +129,4 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+ALLOWED_HOSTS = ['.onrender.com','localhost']
