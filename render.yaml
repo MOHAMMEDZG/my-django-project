@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: lessons-site
+    name: lessons_site
     env: python
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn lessons_site.wsgi:application"
