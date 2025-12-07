@@ -5,4 +5,8 @@ pillow==11.0.0
 django-crispy-forms==2.4
 crispy-bootstrap5==2025.4
 python-dotenv==1.2.1
+<<<<<<< HEAD
 reportlab==4.4.1
+=======
+reportlab==4.4.1
+>>>>>>> ca7bd0f4330f2859c0b53666a49664249a90c3b0
