@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: lessons_site
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn lessons_site.wsgi:application"
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11
