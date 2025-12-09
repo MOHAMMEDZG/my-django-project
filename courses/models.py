@@ -144,4 +144,4 @@ class Video(models.Model):
         return self.youtube_url
 
     def __str__(self):
-        return f"{self.title} - {self.course.title}"
+        return"{self.title} - {self.course.title}"
