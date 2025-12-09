@@ -8,3 +8,6 @@ reportlab==4.4.1
 goofgle.generaliveai
 pymupdf
 django
+google.generaliveai
+pymupdf
+django
