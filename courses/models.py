@@ -90,7 +90,6 @@ class Course(models.Model):
     description = models.TextField(verbose_name='الوصف')
     level = models.CharField(max_length=1, choices=LEVEL_CHOICES,verbose_name='المستوى')
     content = models.TextField(blank=True, null=True, verbose_name='مضمون الدرس')
-    instructor = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='كتب بتاريخ')
     category = models.ForeignKey(CourseCategory, on_delete=models.SET_NULL, null=True, blank=True,verbose_name='الفئة')
     image = models.ImageField(upload_to='course_images/', blank=True, null=True, verbose_name='الصورة')
