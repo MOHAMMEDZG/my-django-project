@@ -32,14 +32,14 @@ class ExamCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['title', 'instructor', 'category', 'level', 'created_at']
+    list_display = ['title', 'category', 'level', 'created_at']
     list_filter = ['category', 'level', 'created_at']
-    search_fields = ['title', 'description', 'instructor']
+    search_fields = ['title', 'description']
     ordering = ['-created_at']
     list_per_page = 20
     readonly_fields = ['created_at']
     fields = [
-        'title', 'description', 'content', 'instructor',
+        'title', 'description', 'content',
         'category', 'level',
         'image', 'video_url', 'pdf_file',
         'created_at'
@@ -57,7 +57,7 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ['created_at', 'course']
     ordering = ['-created_at']
 
-    
+
 
 # -------------------------
 # OTHER MODELS
