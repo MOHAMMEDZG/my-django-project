@@ -17,7 +17,6 @@
             <img src="{{ course.image.url }}" class="img-fluid mb-3">
         {% endif %}
 
-        <p><strong>Nom de l'instructeur :</strong> {{ course.instructor }}</p>
         <p><strong>الصنف :</strong> {{ course.category.name }}</p>
         <p><strong>حرر بتاريخ :</strong> {{ course.created_at|date:"Y-m-d" }}</p>
     </div>
