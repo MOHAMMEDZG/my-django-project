@@ -1,30 +1,33 @@
-import re
 from django import template
+import re
 
 register = template.Library()
 
 @register.filter
 def youtube_embed(url):
-    if not url:
-        return ""
+    """
+    Converts normal YouTube URLs to embed URLs.
+    Supports:
+    - https://www.youtube.com/watch?v=ID
+    - https://youtu.be/ID
+    - shorts
+    """
+    if "embed" in url:
+        return url
 
-    # Extracting code from all types of links
-    patterns = [
-        r"youtube\.com/watch\?v=([^&]+)",
-        r"youtu\.be/([^?&]+)",
-        r"youtube\.com/embed/([^?&]+)",
-        r"youtube\.com/shorts/([^?&]+)"
-    ]
+    # youtu.be link
+    match = re.match(r'https://youtu\.be/(.+)', url)
+    if match:
+        return f"https://www.youtube.com/embed/{match.group(1)}"
 
-    video_id = None
-    for pattern in patterns:
-        match = re.search(pattern, url)
-        if match:
-            video_id = match.group(1)
-            break
+    # normal watch?v=
+    match = re.search(r'v=([^&]+)', url)
+    if match:
+        return f"https://www.youtube.com/embed/{match.group(1)}"
 
-    if not video_id:
-        return ""
+    # shorts
+    match = re.match(r'https://www.youtube.com/shorts/(.+)', url)
+    if match:
+        return f"https://www.youtube.com/embed/{match.group(1)}"
 
-    # build link embed
-    return f"https://www.youtube.com/embed/{video_id}"
+    return url
