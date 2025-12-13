@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['smartlearnen.pythonanywhere.com',
                 'www.smartlearnen.pythonanywhere.com',
-                'taalimarabi.online',]
+                'www.taalimarabi.online',]
 
 
 # Application definition
