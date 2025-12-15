@@ -74,8 +74,7 @@ body {
 }
 /* ===== SEARCH INPUT STYLE ===== */
 #searchInput {
-    width: 100%;
-    max-width: 520px;      
+    width: 500px;      
     padding: 12px 18px;
     font-size: 15px;
     border-radius: 14px;
