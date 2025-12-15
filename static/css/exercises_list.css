@@ -1,75 +1,160 @@
-/* ========== ITEM STYLE ========== */
-
-.small-pdf-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 18px;
-    margin-bottom: 12px;
-    background: #fff;
-    border-radius: 14px;
-    border: 1px solid #e6e6e6;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: 0.25s ease;
-    opacity: 0;
-    transform: translateY(15px);
+/* =========================
+   RESET + GLOBAL
+========================= */
+* {
+    box-sizing: border-box;
 }
 
+body {
+    background: #f4f6fb;
+    font-family: 'Cairo', sans-serif;
+}
 
-/* Hover Effect */
+/* =========================
+   LOADER
+========================= */
+#loader {
+    position: fixed;
+    inset: 0;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader-circle {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ddd;
+    border-top: 5px solid #4f46e5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* =========================
+   CONTAINER
+========================= */
+.container {
+    max-width: 1200px;
+    padding: 15px;
+}
+
+/* =========================
+   TITLE
+========================= */
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* =========================
+   FILTER + SEARCH
+========================= */
+.filter-box {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.filter-box input,
+.filter-box select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    min-width: 200px;
+}
+
+/* =========================
+   GRID RESPONSIVE
+========================= */
+.pdf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+.small-pdf-item {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
 
 .small-pdf-item:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
-.pdf-grid {
-    margin-top: 22px;
-}
-
-
-/* Title */
-
+/* =========================
+   TITLE
+========================= */
 .pdf-title {
+    font-weight: bold;
     font-size: 15px;
-    font-weight: 600;
-    color: #222;
+    margin-bottom: 15px;
+    display: block;
 }
 
-
-/* ========== iOS STYLE DOWNLOAD BUTTON ========== */
-
+/* =========================
+   BUTTON
+========================= */
 .download-btn {
-    background: linear-gradient(135deg, #4C8DFF, #3A6EE8);
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
     color: white;
-    padding: 6px 18px;
-    font-size: 13px;
-    border-radius: 30px;
     text-decoration: none;
-    font-weight: 600;
-    transition: 0.25s ease;
-    box-shadow: 0 3px 10px rgba(76, 141, 255, 0.4);
+    font-size: 14px;
+    transition: 0.3s;
 }
 
 .download-btn:hover {
-    background: linear-gradient(135deg, #3A6EE8, #315BD1);
-    box-shadow: 0 4px 14px rgba(76, 141, 255, 0.6);
+    opacity: 0.9;
 }
 
-
-/* ========== Fade-In Animation on Scroll ========== */
-
+/* =========================
+   FADE IN
+========================= */
 .fade-in {
-    animation: fadeInMove 0.6s ease forwards;
+    animation: fadeUp 0.7s ease forwards;
 }
 
-@keyframes fadeInMove {
-    0% {
+@keyframes fadeUp {
+    from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(25px);
     }
-    100% {
+    to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 600px) {
+    .page-title {
+        font-size: 20px;
+    }
+
+    .download-btn {
+        width: 100%;
     }
 }
