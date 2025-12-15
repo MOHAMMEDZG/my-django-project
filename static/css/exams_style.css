@@ -36,6 +36,25 @@
     color: #222;
 }
 
+/* =========================
+   FILTER + SEARCH
+========================= */
+.filter-box {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.filter-box input,
+.filter-box select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    min-width: 200px;
+}
+
 
 /* ========== iOS STYLE DOWNLOAD BUTTON ========== */
 
