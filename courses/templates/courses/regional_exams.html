@@ -45,33 +45,40 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-        // Loader Animation
-        setTimeout(() => {
-            const loader = document.getElementById("loader");
+    /* ===== LOADER ===== */
+    setTimeout(() => {
+        const loader = document.getElementById("loader");
+        if (loader) {
             loader.style.opacity = "0";
             setTimeout(() => loader.style.display = "none", 400);
-            document.querySelector(".content-area").style.opacity = "1";
-        }, 800);
+        }
+
+        const content = document.querySelector(".content-area");
+        if (content) {
+            content.style.opacity = "1";
+        }
+    }, 600);
 
 
-        // Fade-in Animation on Scroll
-        const items = document.querySelectorAll(".small-pdf-item");
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("fade-in");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        items.forEach(item => observer.observe(item));
-
-    const searchInput = document.getElementById("searchInput");
+    /* ===== FADE-IN ON SCROLL ===== */
     const items = document.querySelectorAll(".fade-item");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("fade-in");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    items.forEach(item => observer.observe(item));
+
+
+    /* ===== SEARCH ===== */
+    const searchInput = document.getElementById("searchInput");
 
     if (searchInput) {
         searchInput.addEventListener("keyup", function () {
@@ -79,10 +86,11 @@
 
             items.forEach(item => {
                 const title = item.dataset.title.toLowerCase();
-                item.style.display = title.includes(value) ? "block" : "none";
+                item.style.display = title.includes(value) ? "flex" : "none";
             });
         });
     }
-    });
+
+});
 </script>
 {% endblock %}
