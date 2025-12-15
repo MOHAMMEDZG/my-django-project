@@ -30,7 +30,7 @@
     <!-- عرض الملفات -->
     <div class="pdf-grid">
         {% for doc in docs %}
-        <div class="small-pdf-item">
+        <div class="small-pdf-item fade-item" data-title="{{ doc.title }}">
             <span class="pdf-title">{{ doc.title }}</span>
             <a href="{{ doc.file.url }}" class="download-btn" download>
                 تحميل
