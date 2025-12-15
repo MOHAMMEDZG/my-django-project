@@ -68,6 +68,20 @@
         }, { threshold: 0.2 });
 
         items.forEach(item => observer.observe(item));
+
+    const searchInput = document.getElementById("searchInput");
+    const items = document.querySelectorAll(".fade-item");
+
+    if (searchInput) {
+        searchInput.addEventListener("keyup", function () {
+            const value = this.value.toLowerCase();
+
+            items.forEach(item => {
+                const title = item.dataset.title.toLowerCase();
+                item.style.display = title.includes(value) ? "block" : "none";
+            });
+        });
+    }
     });
 </script>
 {% endblock %}
