@@ -69,6 +69,32 @@ body {
     border: 1px solid #ccc;
     width: 100%;
 }
+#searchInput {
+    width: 100%;
+    max-width: 520px;      
+    padding: 12px 18px;
+    font-size: 15px;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+/* Hover & Focus */
+#searchInput:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13,110,253,.15);
+}
+
+/* Responsive*/
+@media (max-width: 576px) {
+    #searchInput {
+        max-width: 100%;
+        font-size: 14px;
+        padding: 11px 14px;
+    }
+}
 
 .filter-box label {
     font-weight: 500;
