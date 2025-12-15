@@ -17,28 +17,30 @@
     <h2 class="page-title">📘 قائمة التمارين</h2>
 
     <!-- فلترة -->
-    <form method="get" class="filter-box fade-in">
-        <label>صنف التمارين:</label>
-        <select name="cat" onchange="this.form.submit()">
-            <option value="">جميع التمارين</option>
-            {% for c in categories %}
-                <option value="{{ c.id }}"
-                    {% if request.GET.cat == c.id|stringformat:'s' %} selected {% endif %}
-                >{{ c.name }}</option>
-            {% endfor %}
-        </select>
-    </form>
+  <form method="get" class="filter-box fade-in">
+    <input type="text" id="searchInput" placeholder="🔍 ابحث عن تمرين...">
+
+    <label>صنف التمارين:</label>
+    <select name="cat" onchange="this.form.submit()">
+        <option value="">جميع التمارين</option>
+        {% for c in categories %}
+            <option value="{{ c.id }}"
+                {% if request.GET.cat == c.id|stringformat:'s' %} selected {% endif %}
+            >{{ c.name }}</option>
+        {% endfor %}
+    </select>
+</form>
 
     <!-- عرض التمارين -->
     <div class="pdf-grid">
         {% for doc in docs %}
-        <div class="small-pdf-item">
-            <span class="pdf-title">{{ doc.title }}</span>
+      <div class="small-pdf-item fade-item" data-title="{{ doc.title }}">
+    <span class="pdf-title">{{ doc.title }}</span>
 
-            <a href="{{ doc.file.url }}" class="download-btn" download>
-                تحميل
-            </a>
-        </div>
+    <a href="{{ doc.file.url }}" class="download-btn" download>
+        تحميل
+    </a>
+</div>
         {% empty %}
         <p class="text-muted">لا توجد تمارين متوفرة.</p>
         {% endfor %}
@@ -47,31 +49,56 @@
 </div>
 
 <script>
-        document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-            // Loader Animation
-            setTimeout(() => {
-                const loader = document.getElementById("loader");
-                loader.style.opacity = "0";
-                setTimeout(() => loader.style.display = "none", 400);
-                document.querySelector(".content-area").style.opacity = "1";
-            }, 800);
+    /* =========================
+       LOADER
+    ========================= */
+    setTimeout(() => {
+        const loader = document.getElementById("loader");
+        if (loader) {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = "none", 400);
+        }
+        const content = document.querySelector(".content-area");
+        if (content) content.style.opacity = "1";
+    }, 800);
 
 
-            // Fade-in Animation on Scroll
-            const items = document.querySelectorAll(".small-pdf-item");
+    /* =========================
+       FADE-IN ON SCROLL
+    ========================= */
+    const fadeItems = document.querySelectorAll(".small-pdf-item");
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("fade-in");
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-
-            items.forEach(item => observer.observe(item));
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("fade-in");
+                observer.unobserve(entry.target);
+            }
         });
-        </script>
+    }, { threshold: 0.2 });
 
+    fadeItems.forEach(item => observer.observe(item));
+
+
+    /* =========================
+       LIVE SEARCH
+    ========================= */
+    const searchInput = document.getElementById("searchInput");
+    const items = document.querySelectorAll(".fade-item");
+
+    if (searchInput) {
+        searchInput.addEventListener("keyup", function () {
+            const value = this.value.toLowerCase();
+
+            items.forEach(item => {
+                const title = item.dataset.title.toLowerCase();
+                item.style.display = title.includes(value) ? "block" : "none";
+            });
+        });
+    }
+
+});
+</script>
 {% endblock %}
