@@ -5,29 +5,21 @@ register = template.Library()
 
 @register.filter
 def youtube_embed(url):
-    """
-    Converts normal YouTube URLs to embed URLs.
-    Supports:
-    - https://www.youtube.com/watch?v=ID
-    - https://youtu.be/ID
-    - shorts
-    """
-    if "embed" in url:
-        return url
+    if not url:
+        return ""
 
-    # youtu.be link
-    match = re.match(r'https://youtu\.be/(.+)', url)
+    # إذا غير ID
+    if re.match(r'^[\w-]{11}$', url):
+        return f"https://www.youtube.com/embed/{url}"
+
+    # watch?v=
+    match = re.search(r'v=([\w-]{11})', url)
     if match:
         return f"https://www.youtube.com/embed/{match.group(1)}"
 
-    # normal watch?v=
-    match = re.search(r'v=([^&]+)', url)
+    # youtu.be
+    match = re.search(r'youtu\.be/([\w-]{11})', url)
     if match:
         return f"https://www.youtube.com/embed/{match.group(1)}"
 
-    # shorts
-    match = re.match(r'https://www.youtube.com/shorts/(.+)', url)
-    if match:
-        return f"https://www.youtube.com/embed/{match.group(1)}"
-
-    return url
+    return ""
