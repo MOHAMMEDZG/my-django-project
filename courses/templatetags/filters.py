@@ -4,21 +4,23 @@ import re
 register = template.Library()
 
 @register.filter
-def youtube_embed(url):
-    if not url:
+def youtube_embed(value):
+    if not value:
         return ""
 
-    # إذا غير ID
-    if re.match(r'^[\w-]{11}$', url):
-        return f"https://www.youtube.com/embed/{url}"
+    value = value.strip()
+
+    # إذا عطا غير ID
+    if re.fullmatch(r'[\w-]{11}', value):
+        return f"https://www.youtube.com/embed/{value}"
 
     # watch?v=
-    match = re.search(r'v=([\w-]{11})', url)
+    match = re.search(r'v=([\w-]{11})', value)
     if match:
         return f"https://www.youtube.com/embed/{match.group(1)}"
 
     # youtu.be
-    match = re.search(r'youtu\.be/([\w-]{11})', url)
+    match = re.search(r'youtu\.be/([\w-]{11})', value)
     if match:
         return f"https://www.youtube.com/embed/{match.group(1)}"
 
