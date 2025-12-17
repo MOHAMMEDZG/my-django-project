@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     CourseCategory, ExerciseCategory, ExamCategory,
-    Course, Comment, Document, Video,
+    Course, Comment, Document,
 
 )
 
@@ -69,4 +69,3 @@ class DocumentAdmin(admin.ModelAdmin):
     list_filter = ["exercise_category", "exam_category", "level"]
     search_fields = ["title"]
 
-admin.site.register(Video)
