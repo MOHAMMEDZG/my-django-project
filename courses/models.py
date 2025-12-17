@@ -123,19 +123,6 @@ class Comment(models.Model):
         return f"{self.name} — {self.course.title}"
 
 
-# ============================
-# VIDEOS
-# ============================
-class Video(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='videos', verbose_name='الدرس')
-    title = models.CharField(max_length=200, verbose_name='العنوان')
-    youtube_url = models.URLField(verbose_name='رابط الفيديو')
-
-    class Meta:
-        verbose_name="الفيديو"
-        verbose_name_plural="الفيديوهات"
-
-
     def get_embed_url(self):
         if "watch?v=" in self.youtube_url:
             return self.youtube_url.replace("watch?v=", "embed/")
