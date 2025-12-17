@@ -93,7 +93,6 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='كتب بتاريخ')
     category = models.ForeignKey(CourseCategory, on_delete=models.SET_NULL, null=True, blank=True,verbose_name='الفئة')
     image = models.ImageField(upload_to='course_images/', blank=True, null=True, verbose_name='الصورة')
-    video = models.FileField(upload_to='course_videos/', blank=True, null=True, verbose_name='الفيديو')
     video_url = models.URLField(blank=True, null=True, verbose_name='رابط الفيديو')
     pdf_file = models.FileField(upload_to='course_pdfs/', blank=True, null=True, verbose_name='ملف pdf')
 
