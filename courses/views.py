@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from .models import (
-    Course, CourseCategory, ExamCategory, ExerciseCategory, Video, Document
+    Course, CourseCategory, ExamCategory, ExerciseCategory,  Document
 )
 from .forms import CommentForm
 from django.http import HttpResponse
@@ -15,7 +15,6 @@ def course_detail(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     related_courses = Course.objects.filter(category=course.category).exclude(id=course.id)[:4]
     comments = course.comments.all().order_by('-created_at')
-    videos = Video.objects.filter(course=course)
 
     form = CommentForm(request.POST or None)
     if request.method == 'POST' and form.is_valid():
@@ -29,7 +28,6 @@ def course_detail(request, course_id):
         'related_courses': related_courses,
         'comments': comments,
         'form': form,
-        'videos': videos,
     })
 
 def course_level(request, level):
